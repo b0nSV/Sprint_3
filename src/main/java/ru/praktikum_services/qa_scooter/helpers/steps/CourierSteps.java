@@ -1,14 +1,15 @@
-package org.example.helpers.steps;
+package ru.praktikum_services.qa_scooter.helpers.steps;
 
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.example.entities.Courier;
-import org.example.entities.CourierResponseBody;
-import org.example.helpers.Request;
+import ru.praktikum_services.qa_scooter.entities.Courier;
+import ru.praktikum_services.qa_scooter.entities.CourierResponseBody;
+import ru.praktikum_services.qa_scooter.helpers.Request;
 
 import static io.restassured.RestAssured.*;
-import static org.example.helpers.enums.UriPath.*;
+import static ru.praktikum_services.qa_scooter.helpers.enums.UriPath.*;
 
 public class CourierSteps {
 
@@ -20,7 +21,7 @@ public class CourierSteps {
     @Attachment(value = "Тело ответа")
     public static CourierResponseBody doRegister(Courier courier, int statusCode) {
         Response response = given()
-                .header("Content-type", "application/json")
+                .contentType(ContentType.JSON)
                 .and()
                 .body(courier)
                 .when()

@@ -1,18 +1,17 @@
-package org.example;
+package ru.praktikum_services.qa_scooter;
 
-import com.google.gson.Gson;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import org.example.entities.Courier;
-import org.example.entities.CourierResponseBody;
-import org.example.helpers.RandomSequences;
-import org.example.helpers.Request;
-import org.example.helpers.steps.CourierSteps;
+import ru.praktikum_services.qa_scooter.entities.Courier;
+import ru.praktikum_services.qa_scooter.entities.CourierResponseBody;
+import ru.praktikum_services.qa_scooter.helpers.RandomSequences;
+import ru.praktikum_services.qa_scooter.helpers.Request;
+import ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.*;
-import static org.example.helpers.enums.UriPath.*;
+import static org.apache.http.HttpStatus.*;
+import static ru.praktikum_services.qa_scooter.helpers.enums.UriPath.*;
 import static org.junit.Assert.*;
 
 public class CreateCourierTest {
@@ -32,10 +31,10 @@ public class CreateCourierTest {
     }
 
     @Test
-    @DisplayName("При успешном создании курьера возвращается статус код 201")
+    @DisplayName("При успешном создании УЗ курьера возвращается статус код 201")
     public void createCourierAllRequiredParams201() {
         Courier courier = new Courier(login, password, firstName);
-        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, 201);
+        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, SC_CREATED);
         assertEquals(courierResponseBody.isOk(), true);
     }
 
@@ -43,7 +42,7 @@ public class CreateCourierTest {
     @DisplayName("400 Bad Request при создании УЗ курьера без пароля")
     public void createCourierNoPassword400() {
         Courier courier = new Courier(login, null, firstName);
-        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, 400);
+        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, SC_BAD_REQUEST);
         assertEquals("Недостаточно данных для создания учетной записи", courierResponseBody.getMessage());
     }
 
@@ -51,7 +50,7 @@ public class CreateCourierTest {
     @DisplayName("400 Bad Request при создании УЗ курьера без логина")
     public void createCourierNoLogin400() {
         Courier courier = new Courier(null, password, firstName);
-        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, 400);
+        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, SC_BAD_REQUEST);
         assertEquals("Недостаточно данных для создания учетной записи", courierResponseBody.getMessage());
     }
 
@@ -59,7 +58,7 @@ public class CreateCourierTest {
     @DisplayName("400 Bad Request при создании УЗ курьера без имени курьера")
     public void createCourierNoFirstName400() {
         Courier courier = new Courier(login, password, null);
-        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, 400);
+        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, SC_BAD_REQUEST);
         assertEquals("Недостаточно данных для создания учетной записи", courierResponseBody.getMessage());
     }
 }

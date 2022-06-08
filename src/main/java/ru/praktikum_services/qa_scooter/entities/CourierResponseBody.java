@@ -1,4 +1,4 @@
-package org.example.entities;
+package ru.praktikum_services.qa_scooter.entities;
 
 import com.google.gson.Gson;
 

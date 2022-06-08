@@ -1,6 +1,6 @@
-package org.example.helpers;
+package ru.praktikum_services.qa_scooter.helpers;
 
-import org.example.helpers.enums.UriPath;
+import ru.praktikum_services.qa_scooter.helpers.enums.UriPath;
 
 import java.io.FileInputStream;
 import java.io.IOException;

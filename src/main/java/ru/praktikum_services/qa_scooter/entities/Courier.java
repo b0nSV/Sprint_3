@@ -1,4 +1,4 @@
-package org.example.entities;
+package ru.praktikum_services.qa_scooter.entities;
 
 public class Courier {
     private String login;

@@ -1,4 +1,4 @@
-package org.example.helpers;
+package ru.praktikum_services.qa_scooter.helpers;
 
 import java.util.List;
 import java.util.Random;

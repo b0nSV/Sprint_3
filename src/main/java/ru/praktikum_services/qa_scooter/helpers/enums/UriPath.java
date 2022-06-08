@@ -1,4 +1,4 @@
-package org.example.helpers.enums;
+package ru.praktikum_services.qa_scooter.helpers.enums;
 
 public enum UriPath {
     HOST,
