@@ -14,17 +14,13 @@ public class Request {
             FileInputStream fis = new FileInputStream("src/main/resources/common.properties");
             properties.load(fis);
             switch (uriPath) {
-                case HOST:
+                case BASE_URI:
                     return properties.getProperty("ez_scooter_base_uri");
                 case BASE_URL:
-                    return properties.getProperty("base_url");
-                case COURIER_URL:
-                    return properties.getProperty("courier_url");
-                case ORDERS_URL:
-                    return properties.getProperty("orders_url");
+                    return properties.getProperty("ez_scooter_base_url");
             }
         } catch (IOException e) {
-            System.err.println("Файл свойств отсутствует!");
+            System.err.println("Отсутствует файл свойств");
             throw new RuntimeException(e);
         }
         return null;
