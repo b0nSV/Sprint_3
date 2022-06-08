@@ -1,64 +1,68 @@
 package ru.praktikum_services.qa_scooter;
 
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import ru.praktikum_services.qa_scooter.entities.Courier;
-import ru.praktikum_services.qa_scooter.entities.CourierResponseBody;
+import ru.praktikum_services.qa_scooter.entities.CourierResponse;
+import ru.praktikum_services.qa_scooter.entities.ErrorMessageResult;
 import ru.praktikum_services.qa_scooter.helpers.RandomSequences;
-import ru.praktikum_services.qa_scooter.helpers.Request;
-import ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.apache.http.HttpStatus.*;
-import static ru.praktikum_services.qa_scooter.helpers.enums.UriPath.*;
 import static org.junit.Assert.*;
+import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.registerCourier;
 
 public class CreateCourierTest {
-    //Gson gson;
-    Request request = new Request();
     String login;
     String firstName;
     String password;
+    private static final String NOT_ENOUGH_DATA_CREATE_ACCOUNT_MESSAGE = "Недостаточно данных для создания учетной записи";
 
     @Before
     public void setUp() {
-        // gson = new Gson();
-        RestAssured.baseURI = request.getProperty(HOST);
         login = RandomSequences.createRandomUuid();
-        firstName = RandomSequences.getRandomName();
         password = RandomSequences.createRandomPassword(12);
+        firstName = RandomSequences.getRandomName();
     }
 
     @Test
-    @DisplayName("При успешном создании УЗ курьера возвращается статус код 201")
+    @DisplayName("В теле ответа \"ok\" == true при успешном создании УЗ курьера")
+    public void createCourierAllRequiredParamsOkTrue() {
+        Courier courier = new Courier(login, password, firstName);
+        CourierResponse courierResponse = registerCourier(courier).as(CourierResponse.class);
+        assertTrue(courierResponse.isOk());
+    }
+
+    @Test
+    @DisplayName("Статус код 201 при успешном создании УЗ курьера")
     public void createCourierAllRequiredParams201() {
         Courier courier = new Courier(login, password, firstName);
-        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, SC_CREATED);
-        assertEquals(courierResponseBody.isOk(), true);
+        Response courierResponse = registerCourier(courier);
+        assertEquals(SC_CREATED, courierResponse.statusCode());
     }
 
     @Test
-    @DisplayName("400 Bad Request при создании УЗ курьера без пароля")
-    public void createCourierNoPassword400() {
+    @DisplayName("Ошибка при создании УЗ курьера без пароля")
+    public void createCourierNoPasswordMessageNoData() {
         Courier courier = new Courier(login, null, firstName);
-        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, SC_BAD_REQUEST);
-        assertEquals("Недостаточно данных для создания учетной записи", courierResponseBody.getMessage());
+        ErrorMessageResult courierResponse = registerCourier(courier).as(ErrorMessageResult.class);
+        assertEquals(NOT_ENOUGH_DATA_CREATE_ACCOUNT_MESSAGE, courierResponse.getMessage());
     }
 
     @Test
-    @DisplayName("400 Bad Request при создании УЗ курьера без логина")
-    public void createCourierNoLogin400() {
+    @DisplayName("Ошибка при создании УЗ курьера без логина")
+    public void createCourierNoLoginMessageNoData() {
         Courier courier = new Courier(null, password, firstName);
-        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, SC_BAD_REQUEST);
-        assertEquals("Недостаточно данных для создания учетной записи", courierResponseBody.getMessage());
+        ErrorMessageResult courierResponse = registerCourier(courier).as(ErrorMessageResult.class);
+        assertEquals(NOT_ENOUGH_DATA_CREATE_ACCOUNT_MESSAGE, courierResponse.getMessage());
     }
 
     @Test
-    @DisplayName("400 Bad Request при создании УЗ курьера без имени курьера")
-    public void createCourierNoFirstName400() {
+    @DisplayName("Ошибка при создании УЗ курьера без имени курьера")
+    public void createCourierNoFirstNameMessageNoData() {
         Courier courier = new Courier(login, password, null);
-        CourierResponseBody courierResponseBody = CourierSteps.doRegister(courier, SC_BAD_REQUEST);
-        assertEquals("Недостаточно данных для создания учетной записи", courierResponseBody.getMessage());
+        ErrorMessageResult courierResponse = registerCourier(courier).as(ErrorMessageResult.class);
+        assertEquals(NOT_ENOUGH_DATA_CREATE_ACCOUNT_MESSAGE, courierResponse.getMessage());
     }
 }
