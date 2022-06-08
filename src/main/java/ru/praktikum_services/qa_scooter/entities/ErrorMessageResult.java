@@ -2,26 +2,13 @@ package ru.praktikum_services.qa_scooter.entities;
 
 import com.google.gson.Gson;
 
-public class CourierResponseBody {
-    private Boolean ok;
-    private Integer code;
-    private String message;
+public class ErrorMessageResult {
+    Integer code;
+    String message;
 
-    public CourierResponseBody() {
-    }
-
-    public CourierResponseBody(Boolean ok, Integer code, String message) {
-        this.ok = ok;
+    public ErrorMessageResult(Integer code, String message) {
         this.code = code;
         this.message = message;
-    }
-
-    public Boolean isOk() {
-        return ok;
-    }
-
-    public void setOk(Boolean ok) {
-        this.ok = ok;
     }
 
     public Integer getCode() {
@@ -40,9 +27,12 @@ public class CourierResponseBody {
         this.message = message;
     }
 
+    public ErrorMessageResult() {
+    }
+
     @Override
     public String toString() {
         Gson gson = new Gson();
-        return gson.toJson(new CourierResponseBody(ok, code, message));
+        return gson.toJson(new ErrorMessageResult(code, message));
     }
 }
