@@ -12,6 +12,7 @@ import static org.apache.http.HttpStatus.SC_CREATED;
 public class CourierSteps extends BaseApiSpecs {
 
     private static final String CREATE_COURIER_URL = "/courier";
+    private static final String LOGIN_COURIER_URL = "/courier/login";
 
     @Step("Регистрация курьера") // Type {courier.login} / {courier.password} / {courier.firstName}
     public static Response registerCourier(Courier courier) {
@@ -42,6 +43,6 @@ public class CourierSteps extends BaseApiSpecs {
                 .and()
                 .body(courierCredentials)
                 .when()
-                .post(BASE_URI + BASE_URL + "/courier/login");
+                .post(BASE_URI + BASE_URL + LOGIN_COURIER_URL);
     }
 }
