@@ -1,5 +1,7 @@
 package ru.praktikum_services.qa_scooter.entities;
 
+import ru.praktikum_services.qa_scooter.helpers.RandomSequences;
+
 public class Courier {
     private String login;
     private String password;
@@ -12,6 +14,13 @@ public class Courier {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
+    }
+
+    public static Courier getRandomCourier() {
+        String randomLogin = RandomSequences.createRandomUuid();
+        String randomPassword = RandomSequences.createRandomPassword(12);
+        String randomFirstName = RandomSequences.getRandomName();
+        return new Courier(randomLogin, randomPassword, randomFirstName);
     }
 
     public String getLogin() {
