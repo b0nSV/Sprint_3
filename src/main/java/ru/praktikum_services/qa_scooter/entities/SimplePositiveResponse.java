@@ -2,12 +2,12 @@ package ru.praktikum_services.qa_scooter.entities;
 
 import com.google.gson.Gson;
 
-public class CourierResponse {
+public class SimplePositiveResponse {
     private Boolean ok;
-    public CourierResponse() {
+    public SimplePositiveResponse() {
     }
 
-    public CourierResponse(Boolean ok) {
+    public SimplePositiveResponse(Boolean ok) {
         this.ok = ok;
     }
 
@@ -22,6 +22,6 @@ public class CourierResponse {
     @Override
     public String toString() {
         Gson gson = new Gson();
-        return gson.toJson(new CourierResponse(ok));
+        return gson.toJson(new SimplePositiveResponse(ok));
     }
 }
