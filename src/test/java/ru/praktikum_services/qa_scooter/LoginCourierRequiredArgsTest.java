@@ -6,11 +6,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import ru.praktikum_services.qa_scooter.entities.Courier;
 import ru.praktikum_services.qa_scooter.entities.CourierCredentials;
+import ru.praktikum_services.qa_scooter.entities.ErrorMessageResult;
 
 import static org.apache.http.HttpStatus.*;
 import static ru.praktikum_services.qa_scooter.helpers.steps.BasicSteps.checkStatusCode;
 import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.loginCourier;
 import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.registerRandomCourier;
+import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class LoginCourierRequiredArgsTest {
@@ -49,6 +51,11 @@ public class LoginCourierRequiredArgsTest {
             courierCredentials = new CourierCredentials(randomCourier.getLogin(), randomCourier.getPassword());
         }
         Response loginCourierResponse = loginCourier(courierCredentials);
-        checkStatusCode(loginCourierResponse, statusCode);
+        if (statusCode == SC_BAD_REQUEST){
+            checkStatusCode(loginCourierResponse, statusCode);
+            assertEquals("Недостаточно данных для входа", loginCourierResponse.as(ErrorMessageResult.class).getMessage());
+        } else {
+            checkStatusCode(loginCourierResponse, statusCode);
+        }
     }
 }
