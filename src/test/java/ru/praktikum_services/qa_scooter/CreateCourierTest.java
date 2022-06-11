@@ -1,5 +1,6 @@
 package ru.praktikum_services.qa_scooter;
 
+import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import ru.praktikum_services.qa_scooter.entities.Courier;
@@ -14,6 +15,7 @@ import static org.junit.Assert.*;
 import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.registerCourier;
 import static ru.praktikum_services.qa_scooter.helpers.steps.BasicSteps.checkStatusCode;
 
+@Feature("Регистрация курьера - POST /courier")
 public class CreateCourierTest {
     String login;
     String firstName;

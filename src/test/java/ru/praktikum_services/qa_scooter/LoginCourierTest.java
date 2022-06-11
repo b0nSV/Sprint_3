@@ -1,5 +1,6 @@
 package ru.praktikum_services.qa_scooter;
 
+import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import static ru.praktikum_services.qa_scooter.helpers.steps.BasicSteps.checkSta
 import static org.junit.Assert.*;
 import static org.apache.http.HttpStatus.*;
 
+@Feature("Логин курьера - POST /courier/login")
 public class LoginCourierTest {
     private static final String NOT_FOUND_COURIER_CREDENTIALS_MESSAGE = "Учетная запись не найдена";
 

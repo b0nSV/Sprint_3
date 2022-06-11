@@ -1,5 +1,6 @@
 package ru.praktikum_services.qa_scooter;
 
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import static org.apache.http.HttpStatus.*;
 import static ru.praktikum_services.qa_scooter.helpers.steps.BasicSteps.checkStatusCode;
 import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.registerCourier;
 
+@Feature("Регистрация курьера - POST /courier")
 @RunWith(Parameterized.class)
 public class CreateCourierRequiredArgsTest {
     private final String login;
@@ -27,7 +29,7 @@ public class CreateCourierRequiredArgsTest {
         this.statusCode = statusCode;
     }
 
-    @Parameterized.Parameters(name = "login = {0}, password = {1}, firstName = {2}, requiredStatusCode = {3}")
+    @Parameterized.Parameters(name = "login = {0} | password = {1} | firstName = {2} | requiredStatusCode = {3}")
     public static Object[][] getCourierData() {
         return new Object[][] {
                 {RandomSequences.createRandomUuid(), RandomSequences.createRandomPassword(12), null, SC_BAD_REQUEST},
