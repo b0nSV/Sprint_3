@@ -37,14 +37,6 @@ public class CreateCourierTest {
     }
 
     @Test
-    @DisplayName("Статус код 201 при успешном создании УЗ курьера")
-    public void createCourierAllRequiredParams201() {
-        Courier courier = new Courier(login, password, firstName);
-        Response courierResponse = registerCourier(courier);
-        checkStatusCode(courierResponse, SC_CREATED);
-    }
-
-    @Test
     @DisplayName("Ошибка при создании УЗ курьера без пароля")
     public void createCourierNoPasswordMessageNoData() {
         Courier courier = new Courier(login, null, firstName);
