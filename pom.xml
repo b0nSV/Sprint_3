@@ -24,7 +24,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit4 -->
         <dependency>
