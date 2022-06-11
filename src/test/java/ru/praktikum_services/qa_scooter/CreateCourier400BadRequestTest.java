@@ -7,9 +7,11 @@ import org.junit.runners.Parameterized;
 import ru.praktikum_services.qa_scooter.entities.Courier;
 import ru.praktikum_services.qa_scooter.helpers.RandomSequences;
 
-import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.registerCourier;
+
 import static org.junit.Assert.*;
 import static org.apache.http.HttpStatus.*;
+import static ru.praktikum_services.qa_scooter.helpers.steps.BasicSteps.checkStatusCode;
+import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.registerCourier;
 
 @RunWith(Parameterized.class)
 public class CreateCourier400BadRequestTest {
@@ -22,10 +24,9 @@ public class CreateCourier400BadRequestTest {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
-
     }
 
-    @Parameterized.Parameters(name = " No {3}")
+    @Parameterized.Parameters(name = "Запрос без: {3}")
     public static Object[][] getCourierData() {
         return new Object[][] {
                 {RandomSequences.createRandomUuid(), RandomSequences.createRandomPassword(12), null, "firstName"},
@@ -40,7 +41,6 @@ public class CreateCourier400BadRequestTest {
     public void registerWithoutRequiredParamsReturns400() {
         Courier courier = new Courier(login, password, firstName);
         Response response = registerCourier(courier);
-        assertEquals(SC_BAD_REQUEST, response.statusCode());
-        assertEquals(SC_BAD_REQUEST, response.body().jsonPath().getInt("code"));
+        checkStatusCode(response, SC_BAD_REQUEST);
     }
 }
