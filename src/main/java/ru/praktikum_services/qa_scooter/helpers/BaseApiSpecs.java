@@ -24,4 +24,10 @@ public class BaseApiSpecs {
                 .build()
                 .filter(new AllureRestAssured());
     }
+
+    public static RequestSpecification getDeleteReqSpec() {
+        return new RequestSpecBuilder().log(LogDetail.ALL)
+                .build()
+                .filter(new AllureRestAssured());
+    }
 }

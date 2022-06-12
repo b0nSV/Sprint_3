@@ -13,6 +13,7 @@ public class CourierSteps extends BaseApiSpecs {
 
     private static final String CREATE_COURIER_URL = "/courier";
     private static final String LOGIN_COURIER_URL = "/courier/login";
+    private static final String DELETE_COURIER_URL = "/courier/";
 
     @Step("Регистрация курьера") // Type {courier.login} / {courier.password} / {courier.firstName}
     public static Response registerCourier(Courier courier) {
@@ -44,5 +45,13 @@ public class CourierSteps extends BaseApiSpecs {
                 .body(courierCredentials)
                 .when()
                 .post(BASE_URI + BASE_URL + LOGIN_COURIER_URL);
+    }
+
+    @Step("Удалить учетную запись курьера") // Type {courierCredentials.login} / {courierCredentials.password}
+    public static Response deleteCourier(String courierId) {
+        return given()
+                .spec(getDeleteReqSpec())
+                .when()
+                .delete(BASE_URI + BASE_URL + DELETE_COURIER_URL + courierId);
     }
 }
