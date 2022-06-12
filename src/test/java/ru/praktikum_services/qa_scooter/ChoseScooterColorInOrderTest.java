@@ -2,6 +2,7 @@ package ru.praktikum_services.qa_scooter;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -39,5 +40,7 @@ public class ChoseScooterColorInOrderTest {
         order.setColor(color);
         OrderTrack orderTrack = createOrder(order).as(OrderTrack.class);
         assertNotNull(orderTrack.getTrack());
+        // Удаление созданного заказа
+        cancelOrderByTrack(orderTrack);
     }
 }
