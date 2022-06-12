@@ -1,6 +1,7 @@
 package ru.praktikum_services.qa_scooter;
 
 import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,7 @@ import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.regist
 import static org.junit.Assert.*;
 
 @Feature("Логин курьера - POST /courier/login")
+@Story("Для входа под УЗ курьера нужно передать все обязательные атрибуты")
 @RunWith(Parameterized.class)
 public class LoginCourierRequiredArgsTest {
     private final boolean isLogin;
