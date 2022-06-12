@@ -2,6 +2,7 @@ package ru.praktikum_services.qa_scooter.entities;
 
 import ru.praktikum_services.qa_scooter.helpers.enums.DateEra;
 import ru.praktikum_services.qa_scooter.helpers.RandomSequences;
+
 import java.util.List;
 
 public class Order {
@@ -16,10 +17,10 @@ public class Order {
     private Integer rentTime;
     private String deliveryDate;
     private String comment;
-//    private String[] color;
     private List<String> color;
 
-    public Order(String firstName, String lastName, String address, String metroStation, String phone, Integer rentTime, String deliveryDate, String comment, List<String> color) {
+    public Order(String firstName, String lastName, String address, String metroStation, String phone, Integer rentTime,
+                 String deliveryDate, String comment, List<String> color) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
