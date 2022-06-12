@@ -3,14 +3,17 @@ package ru.praktikum_services.qa_scooter.helpers.steps;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import ru.praktikum_services.qa_scooter.entities.Order;
+import ru.praktikum_services.qa_scooter.entities.OrderTrack;
 import ru.praktikum_services.qa_scooter.helpers.BaseApiSpecs;
 
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.*;
+import static org.apache.http.HttpStatus.SC_OK;
 
 public class OrderSteps extends BaseApiSpecs {
     private static final String CREATE_ORDER_URL = "/orders";
+    private static final String CANCEL_ORDER_URL = "/orders/cancel";
 
     @Step("Создание заказа")
     public static Response createOrder(Order order) {
@@ -22,12 +25,22 @@ public class OrderSteps extends BaseApiSpecs {
                 .post(BASE_URI + BASE_URL + CREATE_ORDER_URL);
     }
 
-    @Step("Получения списка заказов")
+    @Step("Получение списка заказов")
     public static Response getOrderList(HashMap<String, String> params) {
         return given()
                 .queryParams(params)
                 .spec(getGetReqSpec())
                 .when()
                 .get(BASE_URI + BASE_URL + CREATE_ORDER_URL);
+    }
+
+    @Step("Отменить заказ по его трек номеру")
+    public static void cancelOrderByTrack(OrderTrack orderTrack) {
+        given()
+                .spec(getPostReqSpec())
+                .and()
+                .body(orderTrack)
+                .when()
+                .put(BASE_URI + BASE_URL + CANCEL_ORDER_URL);
     }
 }
