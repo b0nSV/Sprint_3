@@ -12,8 +12,16 @@ public class BaseApiSpecs {
     private static final Request request = new Request();
     public static final String BASE_URI = request.getProperty(UriPath.BASE_URI);
     public static final String BASE_URL =  request.getProperty(UriPath.BASE_URL);
+
     public static RequestSpecification getPostReqSpec() {
         return new RequestSpecBuilder().log(LogDetail.ALL)
-                .setContentType(ContentType.JSON).build().filter(new AllureRestAssured());
+                .setContentType(ContentType.JSON).build()
+                .filter(new AllureRestAssured());
+    }
+
+    public static RequestSpecification getGetReqSpec() {
+        return new RequestSpecBuilder().log(LogDetail.ALL)
+                .build()
+                .filter(new AllureRestAssured());
     }
 }

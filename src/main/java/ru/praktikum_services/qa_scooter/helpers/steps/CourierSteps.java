@@ -36,7 +36,7 @@ public class CourierSteps extends BaseApiSpecs {
         return randomCourier;
     }
 
-    @Step("Выполнение входа в систему курьером") // Type {courierCredentials.login} / {courierCredentials.password}
+    @Step("Выполнение входа курьером в систему") // Type {courierCredentials.login} / {courierCredentials.password}
     public static Response loginCourier(CourierCredentials courierCredentials) {
         return given()
                 .spec(getPostReqSpec())
