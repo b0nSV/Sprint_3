@@ -73,8 +73,6 @@ public class LoginCourierTest {
 
     @After
     public void clear() {
-        CourierCredentials courierCredentials = new CourierCredentials(randomCourier.getLogin(), randomCourier.getPassword());
-        Integer courierId = loginCourier(courierCredentials).as(LoginCourierResponse.class).getId();
-        deleteCourier(courierId.toString());
+        deleteCourier(randomCourier.getLogin(), randomCourier.getPassword());
     }
 }

@@ -9,7 +9,6 @@ import ru.praktikum_services.qa_scooter.helpers.BaseApiSpecs;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.*;
-import static org.apache.http.HttpStatus.SC_OK;
 
 public class OrderSteps extends BaseApiSpecs {
     private static final String CREATE_ORDER_URL = "/orders";

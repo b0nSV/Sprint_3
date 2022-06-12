@@ -12,7 +12,7 @@ import ru.praktikum_services.qa_scooter.helpers.RandomSequences;
 
 import static org.apache.http.HttpStatus.*;
 import static ru.praktikum_services.qa_scooter.helpers.steps.BasicSteps.checkStatusCode;
-import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.registerCourier;
+import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.*;
 
 @Feature("Регистрация курьера - POST /courier")
 @Story("Для регистрации УЗ курьера нужно передать все обязательные атрибуты")
@@ -33,13 +33,13 @@ public class CreateCourierRequiredArgsTest {
 
     @Parameterized.Parameters(name = "login = {0} | password = {1} | firstName = {2} | requiredStatusCode = {3}")
     public static Object[][] getCourierData() {
-        return new Object[][] {
+        return new Object[][]{
                 {RandomSequences.createRandomUuid(), RandomSequences.createRandomPassword(12), null, SC_BAD_REQUEST},
-                {RandomSequences.createRandomUuid(), null, RandomSequences.getRandomName(),SC_BAD_REQUEST},
+                {RandomSequences.createRandomUuid(), null, RandomSequences.getRandomName(), SC_BAD_REQUEST},
                 {null, RandomSequences.createRandomPassword(12), RandomSequences.getRandomName(), SC_BAD_REQUEST},
                 {null, null, RandomSequences.getRandomName(), SC_BAD_REQUEST},
                 {null, null, null, SC_BAD_REQUEST},
-                {RandomSequences.createRandomUuid(), RandomSequences.createRandomPassword(12),RandomSequences.getRandomName(), SC_CREATED},
+                {RandomSequences.createRandomUuid(), RandomSequences.createRandomPassword(12), RandomSequences.getRandomName(), SC_CREATED},
         };
     }
 
@@ -48,5 +48,8 @@ public class CreateCourierRequiredArgsTest {
         Courier courier = new Courier(login, password, firstName);
         Response response = registerCourier(courier);
         checkStatusCode(response, statusCode);
+
+        // Удаление курьера
+        deleteCourier(login, password);
     }
 }

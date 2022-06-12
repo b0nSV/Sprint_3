@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import ru.praktikum_services.qa_scooter.entities.Courier;
 import ru.praktikum_services.qa_scooter.entities.CourierCredentials;
+import ru.praktikum_services.qa_scooter.entities.LoginCourierResponse;
 import ru.praktikum_services.qa_scooter.helpers.BaseApiSpecs;
 
 import static io.restassured.RestAssured.*;
@@ -47,11 +48,24 @@ public class CourierSteps extends BaseApiSpecs {
                 .post(BASE_URI + BASE_URL + LOGIN_COURIER_URL);
     }
 
-    @Step("Удалить учетную запись курьера") // Type {courierCredentials.login} / {courierCredentials.password}
+    @Step("Удалить учетную запись курьера")
     public static Response deleteCourier(String courierId) {
         return given()
                 .spec(getDeleteReqSpec())
                 .when()
                 .delete(BASE_URI + BASE_URL + DELETE_COURIER_URL + courierId);
+    }
+
+    @Step("Удалить учетную запись курьера")
+    public static void deleteCourier(String login, String password) {
+        try {
+            if (!login.isEmpty() && !password.isEmpty()) {
+                CourierCredentials courierCredentials = new CourierCredentials(login, password);
+                Integer courierId = loginCourier(courierCredentials).as(LoginCourierResponse.class).getId();
+                deleteCourier(courierId.toString());
+            }
+        } catch (NullPointerException exception) {
+            System.out.println("Курьер не был создан");
+        }
     }
 }

@@ -9,7 +9,6 @@ import org.junit.runners.Parameterized;
 import ru.praktikum_services.qa_scooter.entities.Courier;
 import ru.praktikum_services.qa_scooter.entities.CourierCredentials;
 import ru.praktikum_services.qa_scooter.entities.ErrorMessageResult;
-import ru.praktikum_services.qa_scooter.entities.LoginCourierResponse;
 
 import static org.apache.http.HttpStatus.*;
 import static ru.praktikum_services.qa_scooter.helpers.steps.BasicSteps.checkStatusCode;
@@ -33,10 +32,9 @@ public class LoginCourierRequiredArgsTest {
     @Parameterized.Parameters(name = " theres login -> {0} | theres password -> {1} | response status code {2} ")
     public static Object[][] getLoginData() {
         return new Object[][]{
-                // TODO раскомментировать перед сдачей
                 {false, true, SC_BAD_REQUEST},
-//                {true, false, SC_BAD_REQUEST},
-//                {false, false, SC_BAD_REQUEST},
+                {true, false, SC_BAD_REQUEST},
+                {false, false, SC_BAD_REQUEST},
                 {true, true, SC_OK},
         };
     }
@@ -55,15 +53,14 @@ public class LoginCourierRequiredArgsTest {
             courierCredentials = new CourierCredentials(randomCourier.getLogin(), randomCourier.getPassword());
         }
         Response loginCourierResponse = loginCourier(courierCredentials);
-        if (statusCode == SC_BAD_REQUEST){
+        if (statusCode == SC_BAD_REQUEST) {
             checkStatusCode(loginCourierResponse, statusCode);
             assertEquals("Недостаточно данных для входа", loginCourierResponse.as(ErrorMessageResult.class).getMessage());
         } else {
             checkStatusCode(loginCourierResponse, statusCode);
         }
+
         // Удаление созданного курьера
-        CourierCredentials courierCredentialsToDelete = new CourierCredentials(randomCourier.getLogin(), randomCourier.getPassword());
-        Integer courierId =  loginCourier(courierCredentialsToDelete).as(LoginCourierResponse.class).getId();
-        deleteCourier(courierId.toString());
+        deleteCourier(randomCourier.getLogin(), randomCourier.getPassword());
     }
 }

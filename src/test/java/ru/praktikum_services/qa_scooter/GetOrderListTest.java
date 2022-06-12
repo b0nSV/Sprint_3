@@ -19,7 +19,7 @@ public class GetOrderListTest {
 
     @Test
     @DisplayName("Можно получить список заказов выполнив запрос без необязательных параметров")
-    public void getOrderListNoParamsReturnsOrders(){
+    public void getOrderListNoParamsReturnsOrders() {
         Order randomOrder = Order.getRandomRequiredArgsOrder();
         orderTrack = createOrder(randomOrder).as(OrderTrack.class);
         OrderList orderList = getOrderList(new HashMap<>()).as(OrderList.class);
@@ -39,7 +39,7 @@ public class GetOrderListTest {
     }*/
 
     @After
-    public void clear(){
+    public void clear() {
         cancelOrderByTrack(orderTrack);
     }
 }
