@@ -9,12 +9,12 @@ import org.junit.runners.Parameterized;
 import ru.praktikum_services.qa_scooter.entities.Courier;
 import ru.praktikum_services.qa_scooter.entities.CourierCredentials;
 import ru.praktikum_services.qa_scooter.entities.ErrorMessageResult;
+import ru.praktikum_services.qa_scooter.entities.LoginCourierResponse;
 
 import static org.apache.http.HttpStatus.*;
 import static ru.praktikum_services.qa_scooter.helpers.steps.BasicSteps.checkStatusCode;
-import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.loginCourier;
-import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.registerRandomCourier;
 import static org.junit.Assert.*;
+import static ru.praktikum_services.qa_scooter.helpers.steps.CourierSteps.*;
 
 @Feature("Логин курьера - POST /courier/login")
 @Story("Для входа под УЗ курьера нужно передать все обязательные атрибуты")
@@ -61,5 +61,8 @@ public class LoginCourierRequiredArgsTest {
         } else {
             checkStatusCode(loginCourierResponse, statusCode);
         }
+        CourierCredentials courierCredentialsToDelete = new CourierCredentials(randomCourier.getLogin(), randomCourier.getPassword());
+        Integer courierId =  loginCourier(courierCredentialsToDelete).as(LoginCourierResponse.class).getId();
+        deleteCourier(courierId.toString());
     }
 }
