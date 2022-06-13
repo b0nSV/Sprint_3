@@ -58,14 +58,12 @@ public class CourierSteps extends BaseApiSpecs {
 
     @Step("Удалить учетную запись курьера")
     public static void deleteCourier(String login, String password) {
-        try {
-            if (!login.isEmpty() && !password.isEmpty()) {
-                CourierCredentials courierCredentials = new CourierCredentials(login, password);
-                Integer courierId = loginCourier(courierCredentials).as(LoginCourierResponse.class).getId();
-                deleteCourier(courierId.toString());
-            }
-        } catch (NullPointerException exception) {
+        if (login == null || password == null) {
             System.out.println("Курьер не был создан");
+        } else {
+            CourierCredentials courierCredentials = new CourierCredentials(login, password);
+            Integer courierId = loginCourier(courierCredentials).as(LoginCourierResponse.class).getId();
+            deleteCourier(courierId.toString());
         }
     }
 }
