@@ -16,7 +16,7 @@ public class CourierSteps extends BaseApiSpecs {
     private static final String LOGIN_COURIER_URL = "/courier/login";
     private static final String DELETE_COURIER_URL = "/courier/";
 
-    @Step("Регистрация курьера") // Type {courier.login} / {courier.password} / {courier.firstName}
+    @Step("Зарегистрировать курьера") // Type {courier.login} / {courier.password} / {courier.firstName}
     public static Response registerCourier(Courier courier) {
         return given()
                 .spec(getPostReqSpec())
@@ -26,7 +26,7 @@ public class CourierSteps extends BaseApiSpecs {
                 .post(BASE_URI + BASE_URL + CREATE_COURIER_URL);
     }
 
-    @Step("Регистрация случайного курьера") // Type {courier.login} / {courier.password} / {courier.firstName}
+    @Step("Зарегистрировать случайного курьера") // Type {courier.login} / {courier.password} / {courier.firstName}
     public static Courier registerRandomCourier() {
         Courier randomCourier = Courier.getRandomCourier();
         given()
@@ -38,7 +38,7 @@ public class CourierSteps extends BaseApiSpecs {
         return randomCourier;
     }
 
-    @Step("Выполнение входа курьером в систему") // Type {courierCredentials.login} / {courierCredentials.password}
+    @Step("Выполнить вход курьера в систему") // Type {courierCredentials.login} / {courierCredentials.password}
     public static Response loginCourier(CourierCredentials courierCredentials) {
         return given()
                 .spec(getPostReqSpec())
@@ -48,7 +48,7 @@ public class CourierSteps extends BaseApiSpecs {
                 .post(BASE_URI + BASE_URL + LOGIN_COURIER_URL);
     }
 
-    @Step("Удалить учетную запись курьера")
+    @Step("Удалить учетную запись курьера с ID {courierId}")
     public static Response deleteCourier(String courierId) {
         return given()
                 .spec(getDeleteReqSpec())
@@ -56,7 +56,7 @@ public class CourierSteps extends BaseApiSpecs {
                 .delete(BASE_URI + BASE_URL + DELETE_COURIER_URL + courierId);
     }
 
-    @Step("Удалить учетную запись курьера")
+    @Step("Попытка удалить учетную запись курьера")
     public static void deleteCourier(String login, String password) {
         if (login == null || password == null) {
             System.out.println("Курьер не был создан");

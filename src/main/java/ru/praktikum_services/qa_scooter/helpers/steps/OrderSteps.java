@@ -14,7 +14,7 @@ public class OrderSteps extends BaseApiSpecs {
     private static final String CREATE_ORDER_URL = "/orders";
     private static final String CANCEL_ORDER_URL = "/orders/cancel";
 
-    @Step("Создание заказа")
+    @Step("Создать заказ")
     public static Response createOrder(Order order) {
         return given()
                 .spec(getPostReqSpec())
@@ -24,10 +24,10 @@ public class OrderSteps extends BaseApiSpecs {
                 .post(BASE_URI + BASE_URL + CREATE_ORDER_URL);
     }
 
-    @Step("Получение списка заказов")
-    public static Response getOrderList(HashMap<String, String> params) {
+    @Step("Получить список заказов")
+    public static Response getOrderList(HashMap<String, String> queryParams) {
         return given()
-                .queryParams(params)
+                .queryParams(queryParams)
                 .spec(getGetReqSpec())
                 .when()
                 .get(BASE_URI + BASE_URL + CREATE_ORDER_URL);

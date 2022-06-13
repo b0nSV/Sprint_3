@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class BasicSteps {
 
-    @Step
+    @Step("Проверить статус код ответа; ожидаемый - {statusCode}")
     public static void checkStatusCode(Response response, int statusCode) {
         // List<Integer> positiveStatusCodes = List.of(SC_CREATED, SC_OK);
         if (statusCode < 400) {
