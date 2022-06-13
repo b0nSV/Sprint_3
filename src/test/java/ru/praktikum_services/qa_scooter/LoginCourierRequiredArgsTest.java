@@ -29,7 +29,7 @@ public class LoginCourierRequiredArgsTest {
         this.statusCode = statusCode;
     }
 
-    @Parameterized.Parameters(name = " theres login -> {0} | theres password -> {1} | response status code {2} ")
+    @Parameterized.Parameters(name = " theres login -> {0} | theres password -> {1} | expected status code {2} ")
     public static Object[][] getLoginData() {
         return new Object[][]{
                 {false, true, SC_BAD_REQUEST},
@@ -43,16 +43,16 @@ public class LoginCourierRequiredArgsTest {
     public void loginCourierRequiredArgsTest() {
         CourierCredentials courierCredentials;
         Courier randomCourier = registerRandomCourier();
-        if (!isLogin && isPassword) {
-            courierCredentials = new CourierCredentials(null, randomCourier.getPassword());
-        } else if (isLogin && !isPassword) {
-            courierCredentials = new CourierCredentials(randomCourier.getLogin(), null);
-        } else if (!isLogin) {
-            courierCredentials = new CourierCredentials(null, null);
-        } else {
-            courierCredentials = new CourierCredentials(randomCourier.getLogin(), randomCourier.getPassword());
+        if (!isLogin) {
+            randomCourier.setLogin(null);
         }
+        if (!isPassword) {
+            randomCourier.setPassword(null);
+        }
+        courierCredentials = new CourierCredentials(randomCourier.getLogin(), randomCourier.getPassword());
         Response loginCourierResponse = loginCourier(courierCredentials);
+
+        // Если статус код 400, то также проверяем текст ошибки в теле ответа
         if (statusCode == SC_BAD_REQUEST) {
             checkStatusCode(loginCourierResponse, statusCode);
             assertEquals("Недостаточно данных для входа", loginCourierResponse.as(ErrorMessageResult.class).getMessage());
