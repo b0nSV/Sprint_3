@@ -39,7 +39,7 @@ public class Order {
         String firstName = RandomSequences.getRandomName();
         String lastName = RandomSequences.getRandomName();
         String address = RandomSequences.getRandomAddress();
-        String metroStation = RandomSequences.getRandomMetroStation();
+        String metroStation = RandomSequences.getRandomMetroStationId();
         String phone = RandomSequences.getRandomPhoneNumber();
         int rentTime = RandomSequences.getRandomRentTime();
         String deliveryDate = RandomSequences.getDate(DateEra.DAY_IN_PRESENT);
