@@ -20,8 +20,8 @@ public class LoginCourierResponse {
 
     @Override
     public String toString() {
-        return "LoginCourier{" +
-                "id=" + id +
-                '}';
+        return String.format("LoginCourier {" +
+                "id=%s" +
+                '}', id);
     }
 }

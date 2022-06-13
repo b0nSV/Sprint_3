@@ -34,10 +34,10 @@ public class MetroStation {
 
     @Override
     public String toString() {
-        return "MetroStation{" +
-                "name='" + name + '\'' +
-                ", number='" + number + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+        return String.format("MetroStation {" +
+                "name='%s'" +
+                ", number='%s'" +
+                ", color='%s'" +
+                '}', name, number, color);
     }
 }

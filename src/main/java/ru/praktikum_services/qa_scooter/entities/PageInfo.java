@@ -34,10 +34,10 @@ public class PageInfo {
 
     @Override
     public String toString() {
-        return "PageInfo{" +
-                "page=" + page +
-                ", total=" + total +
-                ", limit=" + limit +
-                '}';
+        return String.format("PageInfo{" +
+                "page=%s" +
+                ", total=%s" +
+                ", limit=%s" +
+                '}', page, total, limit);
     }
 }

@@ -1,6 +1,5 @@
 package ru.praktikum_services.qa_scooter.entities;
 
-import com.google.gson.Gson;
 
 public class ErrorMessageResult {
     Integer code;
@@ -32,7 +31,11 @@ public class ErrorMessageResult {
 
     @Override
     public String toString() {
-        Gson gson = new Gson();
-        return gson.toJson(new ErrorMessageResult(code, message));
+        return String.format("ErrorMessageResult {" +
+                "code=%s" +
+                ", message='%s'" +
+                '}', code, message);
+//        Gson gson = new Gson();
+//        return gson.toJson(new ErrorMessageResult(code, message));
     }
 }

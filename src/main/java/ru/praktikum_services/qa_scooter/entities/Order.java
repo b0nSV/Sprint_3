@@ -119,4 +119,19 @@ public class Order {
     public void setColor(List<String> color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Order {" +
+                "firstName='%s'" +
+                ", lastName='%s'" +
+                ", address='%s'" +
+                ", metroStation='%s'" +
+                ", phone='%s'" +
+                ", rentTime=%s" +
+                ", deliveryDate='%s'" +
+                ", comment='%s'" +
+                ", color=%s" +
+                '}', firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color);
+    }
 }

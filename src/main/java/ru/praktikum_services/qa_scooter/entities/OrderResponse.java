@@ -2,7 +2,7 @@ package ru.praktikum_services.qa_scooter.entities;
 
 import java.util.List;
 
-public class OrderResponse{
+public class OrderResponse {
     private Integer id;
     private Integer courierId;
     private String firstName;
@@ -144,22 +144,23 @@ public class OrderResponse{
 
     @Override
     public String toString() {
-        return "OrderResponse{" +
-                "id=" + id +
-                ", courierId=" + courierId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", metroStation='" + metroStation + '\'' +
-                ", phone='" + phone + '\'' +
-                ", rentTime=" + rentTime +
-                ", deliveryDate='" + deliveryDate + '\'' +
-                ", track=" + track +
-                ", color=" + color +
-                ", comment='" + comment + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", status=" + status +
-                '}';
+        return String.format("OrderResponse {" +
+                        "id=" + id +
+                        ", courierId=%s" +
+                        ", firstName='%s'" +
+                        ", lastName='%s'" +
+                        ", address='%s'" +
+                        ", metroStation='%s'" +
+                        ", phone='%s'" +
+                        ", rentTime=%s" +
+                        ", deliveryDate='%s'" +
+                        ", track=%s" +
+                        ", color=%s" +
+                        ", comment='%s'" +
+                        ", createdAt='%s'" +
+                        ", updatedAt='%s'" +
+                        ", status=%s" +
+                        '}', id, courierId, firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, track,
+                color, comment, createdAt, updatedAt, status);
     }
 }

@@ -20,8 +20,8 @@ public class OrderTrack {
 
     @Override
     public String toString() {
-        return "OrderTrack{" +
-                "track=" + track +
-                '}';
+        return String.format("OrderTrack {" +
+                "track=%s" +
+                '}', track);
     }
 }

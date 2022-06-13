@@ -1,9 +1,8 @@
 package ru.praktikum_services.qa_scooter.entities;
 
-import com.google.gson.Gson;
-
 public class SimplePositiveResponse {
     private Boolean ok;
+
     public SimplePositiveResponse() {
     }
 
@@ -21,7 +20,10 @@ public class SimplePositiveResponse {
 
     @Override
     public String toString() {
-        Gson gson = new Gson();
-        return gson.toJson(new SimplePositiveResponse(ok));
+        return String.format("SimplePositiveResponse {" +
+                "ok=%s" +
+                '}', ok);
+//        Gson gson = new Gson();
+//        return gson.toJson(new SimplePositiveResponse(ok));
     }
 }

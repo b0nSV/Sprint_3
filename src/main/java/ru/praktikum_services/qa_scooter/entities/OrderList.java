@@ -36,10 +36,10 @@ public class OrderList {
 
     @Override
     public String toString() {
-        return "OrderList{" +
-                "orders=" + orders +
-                ", pageInfo=" + pageInfo +
-                ", availableStations=" + availableStations +
-                '}';
+        return String.format("OrderList {" +
+                "orders=%s" +
+                ", pageInfo=%s" +
+                ", availableStations=%s" +
+                '}', orders, pageInfo, availableStations);
     }
 }

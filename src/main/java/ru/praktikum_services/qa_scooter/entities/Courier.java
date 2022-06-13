@@ -49,10 +49,13 @@ public class Courier {
 
     @Override
     public String toString() {
-        return "Courier{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                '}';
+        return String.format("Courier {" +
+                "login='%s'" +
+                ", password='%s'" +
+                ", firstName='%s" +
+                '}', login, password, firstName);
+//        Gson gson = new Gson();
+//        return gson.toJson(new Courier(login, firstName, password));
+//
     }
 }
